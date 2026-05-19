@@ -67,6 +67,7 @@ export default function MapClient({
     L.control.zoom({ position: 'bottomright' }).addTo(m)
     if (onMapClick) {
       m.on('click', e => onMapClick(e.latlng))
+      m.on('tap', e => onMapClick(e.latlng))
       m.getContainer().style.cursor = 'crosshair'
     }
     instanceRef.current = m

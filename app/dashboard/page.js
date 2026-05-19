@@ -91,7 +91,14 @@ export default function DashboardPage() {
 
       {/* Add FAB */}
       {!placingPin && !modal && (
-        <button onClick={() => setPlacingPin(true)} style={{position:'absolute',bottom:'52vh',right:'16px',zIndex:801,width:'50px',height:'50px',borderRadius:'50%',background:'#f97316',color:'white',border:'none',fontSize:'24px',cursor:'pointer',boxShadow:'0 4px 16px rgba(0,0,0,.3)',display:'flex',alignItems:'center',justifyContent:'center'}}>+</button>
+        onClick={() => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      pos => setModal({ latlng: { lat: pos.coords.latitude, lng: pos.coords.longitude }, spot: null }),
+      () => setPlacingPin(true)
+    )
+  } else { setPlacingPin(true) }
+}}style={{position:'absolute',bottom:'52vh',right:'16px',zIndex:801,width:'50px',height:'50px',borderRadius:'50%',background:'#f97316',color:'white',border:'none',fontSize:'24px',cursor:'pointer',boxShadow:'0 4px 16px rgba(0,0,0,.3)',display:'flex',alignItems:'center',justifyContent:'center'}}>+</button>
       )}
 
       {/* Bottom sheet */}
